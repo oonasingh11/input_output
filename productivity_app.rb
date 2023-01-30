@@ -24,6 +24,7 @@ class ProductivityApp
   end
 
   def track_habit(date, habit)
+  #This method tracks whether or not habits are done.
     if @data[date].nil? || @data[date][:habits].nil?
       return nil
     end
@@ -37,10 +38,19 @@ class ProductivityApp
   end
 
   def add_actionable(date, actionable)
-
+  #This method allows you to add what actionables you have to work towards bigger goals.
+    if @data[date].nil?
+      @data[date] = { actionables: actionable}
+    else
+      @data[date][:actionables] << actionable
+    end
   end
 
   def retrieve_actionables(date)
-
+    #This method allows you to find what actionables are for the given date.
+  if @data[date].nil || @data[date][:actionables].nil?
+    return nil
+  else
+    @data[date][:actionables]
   end
 end
