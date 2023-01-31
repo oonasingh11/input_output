@@ -48,9 +48,26 @@ class ProductivityApp
 
   def retrieve_actionables(date)
     #This method allows you to find what actionables are for the given date.
-  if @data[date].nil || @data[date][:actionables].nil?
-    return nil
-  else
+    if @data[date].nil? || @data[date][:actionables].nil?
+      return nil
+    else
     @data[date][:actionables]
+    end
+  end
+
+  def save_data
+    # This method writes @data in the file
+    File.open("data.txt", "w") do |f|
+      f.write(@data.to_json)
+    end
+  end
+
+  def load_data
+    # This method loads @data within the file, specifically it checks first
+    #if file exists and then reads its contents and parses it into
+    #a Ruby object using parse
+    if File.exist?("data.txt")
+      @data = JSON.parse(File.read("data.txt"))
+    end
   end
 end
