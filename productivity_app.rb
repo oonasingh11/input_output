@@ -40,7 +40,7 @@ class ProductivityApp
   def add_actionable(date, actionable)
   #This method allows you to add what actionables you have to work towards bigger goals.
     if @data[date].nil?
-      @data[date] = { actionables: actionable}
+      @data[date] = { actionables: [actionable] }
     else
       @data[date][:actionables] << actionable
     end
